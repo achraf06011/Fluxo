@@ -205,7 +205,7 @@ export default function LaisserAvisScreen() {
             <View style={{ flex: 1 }}>
               <Text style={styles.title}>Laisser un avis</Text>
               <Text style={styles.subtitle}>
-                Commande #{order.id_order} · Vendeur: {seller.nom}
+                Vendeur : {seller.nom}
               </Text>
             </View>
 

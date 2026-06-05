@@ -113,7 +113,7 @@ if ($paiementStatut === "REFUS") $payBadge = "text-bg-danger";
 <div class="container my-4" style="max-width: 1050px;">
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
     <div>
-      <h2 class="fw-bold mb-0"><i class="bi bi-bag-check"></i> Vente #<?php echo (int)$o["id_order"]; ?></h2>
+      <h2 class="fw-bold mb-0"><i class="bi bi-bag-check"></i> Détails de la vente</h2>
       <div class="text-muted">Gestion vendeur de la commande</div>
     </div>
     <div class="d-flex gap-2">

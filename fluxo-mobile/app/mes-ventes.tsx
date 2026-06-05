@@ -183,11 +183,6 @@ export default function MesVentesScreen() {
 
               <View style={styles.infoGrid}>
                 <View style={styles.infoBox}>
-                  <Text style={styles.infoLabel}>Commande</Text>
-                  <Text style={styles.infoValue}>#{item.id_order}</Text>
-                </View>
-
-                <View style={styles.infoBox}>
                   <Text style={styles.infoLabel}>Date</Text>
                   <Text style={styles.infoValue}>
                     {String(item.date_commande).substring(0, 10)}

@@ -278,7 +278,6 @@ export default function MesAnnoncesScreen() {
                 )}
 
                 <View style={styles.infoBox}>
-                  <Text style={styles.idText}>#{item.id_annonce}</Text>
                   <Text style={styles.title}>{item.titre}</Text>
 
                   {hasPromo(item) ? (

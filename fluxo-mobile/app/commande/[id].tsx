@@ -154,12 +154,12 @@ export default function CommandeDetailsScreen() {
 
   const heroTitle = isPaid ? "Commande confirmée" : "Commande en attente de paiement";
   const heroSub = isPaid
-    ? `Commande #${order.id_order}`
-    : `Commande #${order.id_order} · Paiement non terminé`;
+    ? "Ta commande est bien enregistrée."
+    : "Paiement non terminé.";
 
   return (
     <>
-      <Stack.Screen options={{ title: `Commande #${order.id_order}` }} />
+      <Stack.Screen options={{ title: "Commande" }} />
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.hero}>

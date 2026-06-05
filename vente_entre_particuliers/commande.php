@@ -47,7 +47,6 @@ if ($ps === "REFUS") $payBadge = "text-bg-danger";
   <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
     <div>
       <h2 class="fw-bold mb-0"><i class="bi bi-receipt-cutoff"></i> Détail commande</h2>
-      <div class="text-muted">Commande #<?php echo (int)$o["id_order"]; ?></div>
     </div>
     <a class="btn btn-outline-secondary" href="mes_commandes.php"><i class="bi bi-arrow-left"></i> Mes commandes</a>
   </div>

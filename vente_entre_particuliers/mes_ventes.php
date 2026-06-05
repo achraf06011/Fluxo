@@ -173,7 +173,6 @@ function badgeLivraison($st) {
           <table class="table table-hover mb-0 align-middle">
             <thead class="table-light">
               <tr>
-                <th>#Commande</th>
                 <th>Date</th>
                 <th>Acheteur</th>
                 <th>Statut</th>
@@ -188,7 +187,6 @@ function badgeLivraison($st) {
             <tbody>
               <?php foreach ($rows as $r): ?>
                 <tr>
-                  <td class="fw-semibold">#<?php echo (int)$r["id_order"]; ?></td>
                   <td><?php echo htmlspecialchars($r["date_commande"]); ?></td>
                   <td>
                     <div class="fw-semibold"><?php echo htmlspecialchars($r["acheteur_nom"]); ?></div>

@@ -176,11 +176,11 @@ export default function VenteDetailsScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: `Vente #${order.id_order}` }} />
+      <Stack.Screen options={{ title: "Vente" }} />
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.headerBox}>
-          <Text style={styles.pageTitle}>Vente #{order.id_order}</Text>
+          <Text style={styles.pageTitle}>Détails de la vente</Text>
           <Text style={styles.pageSub}>Gestion vendeur de la commande</Text>
         </View>
 

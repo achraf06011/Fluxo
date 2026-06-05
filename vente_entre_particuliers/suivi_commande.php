@@ -187,7 +187,7 @@ if ($isFromAdmin) {
 <div class="container my-5" style="max-width: 980px;">
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
     <h2 class="fw-bold mb-0">
-      <i class="bi bi-truck"></i> Suivi commande #<?php echo (int)$o["id_order"]; ?>
+      <i class="bi bi-truck"></i> Suivi de la commande
     </h2>
     <a class="btn btn-outline-secondary" href="<?php echo e($backUrl); ?>">
       Retour

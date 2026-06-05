@@ -157,12 +157,12 @@ export default function SuiviCommandeScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: `Suivi #${order.id_order}` }} />
+      <Stack.Screen options={{ title: "Suivi commande" }} />
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.hero}>
           <View style={styles.headerRow}>
-            <Text style={styles.pageTitle}>Suivi commande #{order.id_order}</Text>
+            <Text style={styles.pageTitle}>Suivi de la commande</Text>
 
             <TouchableOpacity
               style={styles.outlineBtn}

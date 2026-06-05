@@ -77,7 +77,7 @@ if (!$seller) {
     <div>
       <h2 class="fw-bold mb-0"><i class="bi bi-star"></i> Laisser un avis</h2>
       <div class="text-muted">
-        Commande #<?php echo (int)$orderId; ?> · Vendeur: <b><?php echo e($seller["nom"]); ?></b>
+        Vendeur: <b><?php echo e($seller["nom"]); ?></b>
       </div>
     </div>
 

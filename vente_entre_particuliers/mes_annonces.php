@@ -83,7 +83,6 @@ include "includes/navbar.php";
           <thead class="table-light">
             <tr>
               <th style="width:90px;">Photo</th>
-              <th>ID</th>
               <th>Titre</th>
               <th>Prix</th>
               <th>Stock</th>
@@ -116,7 +115,6 @@ include "includes/navbar.php";
                   <?php endif; ?>
                 </td>
 
-                <td>#<?php echo (int)$a["id_annonce"]; ?></td>
                 <td><?php echo e($a["titre"]); ?></td>
 
                 <td>
