@@ -40,7 +40,7 @@ export default function MenuScreen() {
       return () => {
         active = false;
       };
-    }, [])
+    }, []),
   );
 
   function goToPublic(path: string) {
@@ -65,7 +65,7 @@ export default function MenuScreen() {
             }, 120);
           },
         },
-      ]
+      ],
     );
   }
 
@@ -115,7 +115,10 @@ export default function MenuScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.item} onPress={() => goToPublic("/(tabs)")}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => goToPublic("/(tabs)")}
+        >
           <Text style={styles.itemText}>Annonces</Text>
         </TouchableOpacity>
 
@@ -270,6 +273,7 @@ export default function MenuScreen() {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
+
     flexDirection: "row",
     backgroundColor: "rgba(0,0,0,0.18)",
   },
@@ -388,3 +392,4 @@ const styles = StyleSheet.create({
     fontWeight: "800",
   },
 });
+// g
