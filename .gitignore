@@ -1,0 +1,33 @@
+# ===== SECRETS — NE JAMAIS PARTAGER =====
+vente_entre_particuliers/config/stripe.php
+vente_entre_particuliers/config/mail_secret.php
+.env
+.env.local
+.env.*.local
+
+# ===== Dépendances PHP (réinstallables via composer) =====
+**/vendor/
+
+# ===== Dépendances JS (réinstallables via npm install) =====
+**/node_modules/
+
+# ===== Images envoyées par les utilisateurs (données de test) =====
+vente_entre_particuliers/uploads/*
+!vente_entre_particuliers/uploads/.gitkeep
+
+# ===== Expo / React Native =====
+fluxo-mobile/.expo/
+fluxo-mobile/dist/
+fluxo-mobile/web-build/
+*.tsbuildinfo
+
+# ===== Logs =====
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# ===== OS / éditeurs =====
+.DS_Store
+Thumbs.db
+.idea/
