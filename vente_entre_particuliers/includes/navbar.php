@@ -214,6 +214,31 @@ if (isLoggedIn()) {
     padding: 4px 6px;
   }
 
+  /* Badge collé sur l'icône (façon mobile / Facebook) */
+  .fluxo-navbar .nav-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    line-height: 1;
+  }
+
+  .fluxo-navbar .nav-badge {
+    position: absolute;
+    top: -8px;
+    left: 100%;
+    transform: translateX(-45%);
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #dc3545;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    box-shadow: 0 0 0 2px #fff;
+  }
+
   .fluxo-navbar .btn {
     padding: 8px 14px;
     font-size: 14px;
@@ -290,22 +315,26 @@ if (isLoggedIn()) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link fluxo-nav-link position-relative" href="mes_commandes.php">
-              <i class="bi bi-receipt"></i>
+            <a class="nav-link fluxo-nav-link" href="mes_commandes.php">
+              <span class="nav-icon-wrap">
+                <i class="bi bi-receipt"></i>
+                <?php if ($buyerOrderUpdatesBadge > 0): ?>
+                  <span class="nav-badge"><?php echo (int)$buyerOrderUpdatesBadge; ?></span>
+                <?php endif; ?>
+              </span>
               <span>Mes commandes</span>
-              <?php if ($buyerOrderUpdatesBadge > 0): ?>
-                <span class="badge rounded-pill text-bg-danger ms-1"><?php echo (int)$buyerOrderUpdatesBadge; ?></span>
-              <?php endif; ?>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link fluxo-nav-link position-relative" href="mes_ventes.php">
-              <i class="bi bi-bag-check"></i>
+            <a class="nav-link fluxo-nav-link" href="mes_ventes.php">
+              <span class="nav-icon-wrap">
+                <i class="bi bi-bag-check"></i>
+                <?php if ($newSalesBadge > 0): ?>
+                  <span class="nav-badge"><?php echo (int)$newSalesBadge; ?></span>
+                <?php endif; ?>
+              </span>
               <span>Ventes</span>
-              <?php if ($newSalesBadge > 0): ?>
-                <span class="badge rounded-pill text-bg-danger ms-1"><?php echo (int)$newSalesBadge; ?></span>
-              <?php endif; ?>
             </a>
           </li>
 
@@ -331,12 +360,14 @@ if (isLoggedIn()) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link fluxo-nav-link position-relative" href="messages.php">
-              <i class="bi bi-chat-dots"></i>
+            <a class="nav-link fluxo-nav-link" href="messages.php">
+              <span class="nav-icon-wrap">
+                <i class="bi bi-chat-dots"></i>
+                <?php if ($unreadBadge > 0): ?>
+                  <span class="nav-badge"><?php echo (int)$unreadBadge; ?></span>
+                <?php endif; ?>
+              </span>
               <span>Messages</span>
-              <?php if ($unreadBadge > 0): ?>
-                <span class="badge rounded-pill text-bg-danger ms-1"><?php echo (int)$unreadBadge; ?></span>
-              <?php endif; ?>
             </a>
           </li>
 
@@ -348,11 +379,13 @@ if (isLoggedIn()) {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i class="bi bi-bell"></i>
+              <span class="nav-icon-wrap" id="notifIconWrap">
+                <i class="bi bi-bell"></i>
+                <?php if ($notifBadge > 0): ?>
+                  <span id="notifBadgeBubble" class="nav-badge"><?php echo (int)$notifBadge; ?></span>
+                <?php endif; ?>
+              </span>
               <span>Notifications</span>
-              <?php if ($notifBadge > 0): ?>
-                <span id="notifBadgeBubble" class="badge rounded-pill text-bg-danger ms-1"><?php echo (int)$notifBadge; ?></span>
-              <?php endif; ?>
             </a>
 
             <ul
@@ -551,11 +584,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let badge = document.getElementById("notifBadgeBubble");
 
     if (count > 0) {
-      if (!badge && notifBtn) {
-        badge = document.createElement("span");
-        badge.id = "notifBadgeBubble";
-        badge.className = "badge rounded-pill text-bg-danger ms-1";
-        notifBtn.appendChild(badge);
+      if (!badge) {
+        const wrap = document.getElementById("notifIconWrap");
+        if (wrap) {
+          badge = document.createElement("span");
+          badge.id = "notifBadgeBubble";
+          badge.className = "nav-badge";
+          wrap.appendChild(badge);
+        }
       }
       if (badge) {
         badge.textContent = count;

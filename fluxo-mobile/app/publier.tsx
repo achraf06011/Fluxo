@@ -159,7 +159,7 @@ const CATEGORIES: Record<string, string[]> = {
     "LACOSTE",
     "ASOS",
     "SHEIN",
-    "AUTRE",
+    "AUTRE", 
   ],
   MAISON: [
     "IKEA",

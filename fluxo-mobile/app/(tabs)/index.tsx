@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import {
   View,
   Text,
-  FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -429,11 +428,14 @@ export default function HomeScreen() {
     loadExtras();
   }, []);
 
+  // NB : prixMin / prixMax ne sont PAS dans les dépendances.
+  // Sinon chaque chiffre tapé relancerait loadAnnonces() (écran "Chargement"),
+  // ce qui ferme le clavier. Le prix s'applique via le bouton "Filtrer".
   useFocusEffect(
     useCallback(() => {
       loadAnnonces();
       loadExtras();
-    }, [search, ville, categorie, marque, prixMin, prixMax, tri])
+    }, [search, ville, categorie, marque, tri])
   );
 
   async function requireLoginBefore(action: () => void) {
@@ -652,11 +654,10 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={annonces}
-        keyExtractor={(item) => String(item.id_annonce)}
+      <ScrollView
         contentContainerStyle={{ paddingBottom: 30 }}
-        ListHeaderComponent={
+        keyboardShouldPersistTaps="handled"
+      >
           <View style={styles.headerWrap}>
             <View style={styles.hero}>
               <Text style={styles.heroTitle}>Fluxo</Text>
@@ -888,9 +889,10 @@ export default function HomeScreen() {
               </Text>
             </View>
           </View>
-        }
-        renderItem={({ item }) => (
+
+          {annonces.map((item) => (
           <TouchableOpacity
+            key={item.id_annonce}
             activeOpacity={0.92}
             style={styles.card}
             onPress={() => router.push(`/annonce/${item.id_annonce}`)}
@@ -1016,17 +1018,18 @@ export default function HomeScreen() {
               </View>
             </View>
           </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <View style={styles.emptyWrap}>
-            <Feather name="search" size={34} color="#9ca3af" />
-            <Text style={styles.emptyTitle}>Aucune annonce trouvée</Text>
-            <Text style={styles.emptyText}>
-              Essaie une autre recherche ou enlève quelques filtres.
-            </Text>
-          </View>
-        }
-      />
+          ))}
+
+          {annonces.length === 0 ? (
+            <View style={styles.emptyWrap}>
+              <Feather name="search" size={34} color="#9ca3af" />
+              <Text style={styles.emptyTitle}>Aucune annonce trouvée</Text>
+              <Text style={styles.emptyText}>
+                Essaie une autre recherche ou enlève quelques filtres.
+              </Text>
+            </View>
+          ) : null}
+      </ScrollView>
     </View>
   );
 }
