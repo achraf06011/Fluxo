@@ -55,7 +55,8 @@ try {
 
   $idAnnonce = (int)$row["id_annonce"];
 
-  // 3) Anti doublon : même user + même commande + même vendeur
+  // 3) Anti doublon : un seul avis par (commande, vendeur)
+  //    -> correspond à la contrainte unique uniq_review_order_seller
   $stmt = $pdo->prepare("
     SELECT id_review
     FROM review
@@ -65,7 +66,7 @@ try {
   $stmt->execute([$orderId, $sellerId, $userId]);
 
   if ($stmt->fetch()) {
-    fail("Tu as déjà noté ce vendeur pour cette commande.", $orderId, $sellerId);
+    fail("Tu as déjà laissé un avis pour cette commande.", $orderId, $sellerId);
   }
 
   // 4) Insert dans ta vraie structure review
@@ -87,5 +88,9 @@ try {
   exit;
 
 } catch (Exception $e) {
-  fail("Erreur serveur: " . $e->getMessage(), $orderId, $sellerId);
+  // Doublon détecté au niveau base (contrainte unique) -> message propre
+  if ($e instanceof PDOException && $e->getCode() === "23000") {
+    fail("Tu as déjà laissé un avis pour cette commande.", $orderId, $sellerId);
+  }
+  fail("Erreur serveur. Réessaie plus tard.", $orderId, $sellerId);
 }

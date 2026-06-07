@@ -90,6 +90,8 @@ try {
 
   $idAnnonce = (int)$row["id_annonce"];
 
+  // Anti doublon : un seul avis par (commande, vendeur)
+  // -> correspond à la contrainte unique uniq_review_order_seller
   $stmt = $pdo->prepare("
     SELECT id_review
     FROM review
@@ -101,7 +103,7 @@ try {
   if ($stmt->fetch()) {
     echo json_encode([
       "ok" => false,
-      "message" => "Tu as déjà noté ce vendeur pour cette commande."
+      "message" => "Tu as déjà laissé un avis pour cette commande."
     ], JSON_UNESCAPED_UNICODE);
     exit;
   }
@@ -133,9 +135,16 @@ try {
   ], JSON_UNESCAPED_UNICODE);
 
 } catch (Exception $e) {
+  if ($e instanceof PDOException && $e->getCode() === "23000") {
+    echo json_encode([
+      "ok" => false,
+      "message" => "Tu as déjà laissé un avis pour cette commande."
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+  }
   http_response_code(500);
   echo json_encode([
     "ok" => false,
-    "message" => "Erreur serveur: " . $e->getMessage()
+    "message" => "Erreur serveur. Réessaie plus tard."
   ], JSON_UNESCAPED_UNICODE);
 }
